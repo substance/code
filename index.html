@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <link href='styles/fonts/open-sans/open-sans.css' rel='stylesheet' type='text/css'/>
+
+  <title>Substance Code</title>
+  <link href="styles/substance.css" rel="stylesheet" />
+
+</head>
+<body>
+
+
+  <!-- Full list -->
+<div id='list' class='clearfix limiter'>
+  <div class='pad4y'>
+    <div class='clearfix prose space-bottom'>
+      <h1>Substance Code</h1>
+      <p>Substance provides an extensive, customizable content creation and annotation framework that enables user-centric interfaces and automatic data processing via your web-browser. Thanks to its modular nature it creates an ideal environment for many integration scenarios. We release all building blocks as open source. You can find them on <a href="http://github.com/substance">Github</a>.</p>
+    </div>
+
+    <div class='keyline-all round'>
+      <div class='clearfix keyline-bottom'>
+        <div class='col3 pad2'>
+          <h3>Getting Started</h3>
+        </div>
+        <div class='col9 keyline-left pad2'>
+          <div class='space-bottom'>
+            <h3><a href='/tutorial/'>Tutorial</a></h3>
+            <p class='small'>Learn how to create a Substance Article from a markdown file, modify that document in the Substance Composer and publish it on the web.</p>
+          </div>
+          <div>
+            <h3><a href='/manual'>Substance Manual</a></h3>
+            <p class='small'>Read the complete developers Manual.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class='clearfix'>
+        <div class='col3 pad2'>
+          <h3 class=''>Available Modules</h3>
+        </div>
+        <div class='col9 keyline-left pad2'>
+          <div>
+            <h3><a href='http://github.com/substance/reader'>Reader</a></h3>
+            <p class='small'>An interactive Reading interface for Substance documents.</p>
+            <p class='small'><a href='substance-reader-0.4.0.js'> Download Version 0.4.0</a></p>
+            <h3><a href='/mapbox.js/'>Article</a></h3>
+            <p class='small'>The Substance Article is a reference implementation of the Substance Document Model. It features basic content types such as paragraphs, headings, images and code blocks.</p>
+            <p class='small'><a href='substance-reader-0.4.0.js'> Download Version 0.3.0</a> for the browser or <code>npm install substance-article</code> for use with Node.js</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end .limiter -->
+
+
+<!-- Substance Reader -->
+
+<div class="clearfix limiter">
+  <div id="intro" class="section col12 clearfix pad4y">
+    <div class="prose space-bottom2">
+      <h2>Substance Reader</h2>
+      <p>The Substance Reader is an integral part of the Substance technology stack used for displaying Substance Documents on digital devices.</p>
+      <p><img src="images/reader.png"></p>
+      <p>The easiest way to get started is downloading an arbitrary Substance article (e.g. <a href="http://substance.io/beyond-simulating-paper.sdf.zip">this one</a>) and extracting its contents. In the <code>index.html</code> file you find the relevant code in order to construct a Substance Reader instance.</p>
+      <pre><code>
+var app = new Substance.Reader({
+  document: data
+});
+
+$(function() {
+  app.start();
+});
+      </code></pre>
+      <p>The Reader takes a Substance Document serialized as <a href="http://substance.io/diy-publishing-with-substance-and-github-pages/content.json">JSON</a>.</p>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Substance Article -->
+
+<div class="clearfix limiter">
+
+  <div id="intro" class="section col12 clearfix pad4y">
+    <div class="prose space-bottom2">
+
+      <h2>Substance Article</h2>
+      <p>Substance Document helps with the creation and transformation of digital documents. It ensures consistency, separates content from presentation and provides an easy to use API.</p>
+
+      <h3>Getting started</h3>
+      <p>Create a new article.</p>
+      <pre><code>
+var doc = new Substance.Article();
+      </code></pre>
+
+      <p>Add some text.</p>
+      <pre><code>
+doc.create({
+  id: "p1",
+  type: "text",
+  content: "Hello World"
+});
+      </code></pre>
+      <p>New nodes are just stored in a graph-like object space. In order to make them show up you have to <code>show</code> them</p>
+
+      <pre><code>
+doc.show("content", ["text_1"])
+      </code></pre>
+
+      <p>Let's annotate our document.</p>
+
+      <pre><code>
+var a1 = {
+  "id": "a1",
+  "type": "remark",
+  "range": [7, 11],
+  "path": ["p1", "content"],
+  "title": "World",
+  "description": "World is a common name for the whole of human civilization, ...""
+};
+
+doc.create(a1);
+      </code></pre>
+
+      <p>Export document to JSON</p>
+      <pre><code>
+doc.toJSON();
+      </code></pre>
+
+      <p>This just scratches the Surface of the module. The Substance Article even features a <a href="https://github.com/substance/nodes/blob/prototype/src/file/file.js">File</a> node type which allows you to stick binary data to your Substance Article. To learn about its usage see the test suite</p>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+</html>
